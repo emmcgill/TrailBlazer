@@ -1,0 +1,43 @@
+﻿@model Models.Review.TrailReview.TrailReviewDetail
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<h2 style="color:#1a394e; font-family: 'Montserrat', sans-serif; font-weight:bold;">@Model.Title</h2>
+
+<div style="color:#1a394e;">
+    <hr />
+    <dl class="dl-horizontal" style="text-indent:24px;">
+        @Html.HiddenFor(model => model.TrailId)
+        @Html.HiddenFor(model => model.Title)
+
+        <dt style="font-family: 'Montserrat', sans-serif; font-weight: 900;">
+            @Html.DisplayNameFor(model => model.Score) :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Score)
+        </dd>
+
+        <dt style="font-family: 'Montserrat', sans-serif; font-weight: 900;">
+            @Html.DisplayNameFor(model => model.Comment) :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comment)
+        </dd>
+
+        <dt style="font-family: 'Montserrat', sans-serif; font-weight: 900;">
+            @Html.DisplayNameFor(model => model.VisitDate) :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VisitDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a href="javascript:void(0);" onclick="history.go(-1);">Back to List</a>
+</p>

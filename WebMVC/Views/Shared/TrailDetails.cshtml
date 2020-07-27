@@ -1,0 +1,117 @@
+﻿@model Models.Trail.TrailDetail
+
+
+@{
+    ViewBag.Title = Model.Name;
+    ViewBag.Id = Model.TrailId;
+}
+
+<h2 style="color:#1a394e; font-family: 'Montserrat', sans-serif; font-weight:bold;">@ViewBag.Title [ @ViewBag.Id ]</h2>
+
+<div style="color:#1a394e;">
+    <hr />
+    <dl class="dl-horizontal">
+        @Html.HiddenFor(model => model.Name)
+        @Html.HiddenFor(model => model.TrailId)
+
+        <dt style="font-family: 'Montserrat', sans-serif; font-weight: 900;">
+            @Html.DisplayNameFor(model => model.TrailId) :
+        </dt>
+
+        <dd style="font-family: 'Roboto Condensed', sans-serif; font-size:1.25em;">
+            @Html.DisplayFor(model => model.TrailId)
+        </dd>
+
+        <dt style="font-family: 'Montserrat', sans-serif; font-weight: 900;">
+            @Html.DisplayNameFor(model => model.Length) (in miles) :
+        </dt>
+
+        <dd style="font-family: 'Roboto Condensed', sans-serif; font-size:1.25em;">
+            @Html.DisplayFor(model => model.Length)
+        </dd>
+
+        <dt style="font-family: 'Montserrat', sans-serif; font-weight: 900;">
+            @Html.DisplayNameFor(model => model.TrailDifficulty) :
+        </dt>
+
+        <dd style="font-family: 'Roboto Condensed', sans-serif; font-size:1.25em;">
+            @Html.DisplayFor(model => model.TrailDifficulty)
+        </dd>
+
+        <dt style="font-family: 'Montserrat', sans-serif; font-weight: 900;">
+            @Html.DisplayNameFor(model => model.IsTrailALoop) :
+        </dt>
+
+        <dd style="font-family: 'Roboto Condensed', sans-serif; font-size:1.25em;">
+            @Html.DisplayFor(model => model.IsTrailALoop)
+        </dd>
+
+        <dt style="font-family: 'Montserrat', sans-serif; font-weight: 900;">
+            @Html.DisplayNameFor(model => model.Description) :
+        </dt>
+
+        <dd style="font-family: 'Roboto Condensed', sans-serif; font-size:1.25em;">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt style="font-family: 'Montserrat', sans-serif; font-weight: 900;">
+            @Html.DisplayNameFor(model => model.AverageRating) :
+        </dt>
+
+        <dd style="font-family: 'Roboto Condensed', sans-serif; font-size:1.25em;">
+            @Html.DisplayFor(model => model.AverageRating)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a href="javascript:void(0);" onclick="history.go(-1);">Back to List</a> |
+    @Html.ActionLink("Edit", "TrailEdit", new { id = Model.TrailId }) |
+    @Html.ActionLink("Delete", "TrailDelete", new { id = Model.TrailId })
+</p>
+<hr />
+
+<h3 style="font-family: 'Montserrat', sans-serif; font-weight:bold;">Trail Reviews</h3>
+
+<p>
+    @Html.ActionLink("Create A New Review", "TrailReviewCreate")
+</p>
+
+<table class="table" style="background-color:#1a394e;">
+    <tr style="color:#f4f5f7; font-size:1.20em; font-family: 'Montserrat', sans-serif; text-indent:24px;">
+        <th>
+        </th>
+        <th>
+            <h5><b>Title</b></h5>
+        </th>
+        <th>
+            <h5><b>Score</b></h5>
+        </th>
+        <th>
+            <h5><b>Visit Date</b></h5>
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Reviews)
+    {
+        <tr style="background-color:#91c7de; color:#1a394e; border-top: solid 5px; border-color:white; font-weight:bold; font-family: 'Roboto Condensed', sans-serif; font-size:1.15em; text-indent:24px;">
+            <td>
+                @Html.HiddenFor(modelItem => item.TrailId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Score)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VisitDate)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "TrailReviewDetails", new { id = item.ReviewId })
+            </td>
+        </tr>
+    }
+
+</table>

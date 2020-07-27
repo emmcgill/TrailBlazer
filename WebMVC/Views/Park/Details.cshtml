@@ -1,0 +1,121 @@
+﻿@model Models.Park.ParkDetail
+
+@{
+    ViewBag.Title = Model.Name;
+    ViewBag.Id = Model.ParkId;
+}
+
+
+
+
+<h2 style="color:#1a394e; font-family: 'Montserrat', sans-serif; font-weight:bold;">@ViewBag.Title [ @ViewBag.Id ]</h2>
+
+<div style="color:#1a394e;">
+
+    <hr />
+    <dl class="dl-horizontal">
+        @Html.HiddenFor(model => model.Name)
+
+        <dt style="font-family: 'Montserrat', sans-serif; font-weight: 900;">
+            @Html.DisplayNameFor(model => model.ParkId) :
+        </dt>
+
+        <dd style="font-family: 'Roboto Condensed', sans-serif; font-size:1.25em;">
+            @Html.DisplayFor(model => model.ParkId)
+        </dd>
+
+        <dt style="font-family: 'Montserrat', sans-serif; font-weight: 900;">
+            @Html.DisplayNameFor(model => model.Address) :
+        </dt>
+
+        <dd style="font-family: 'Roboto Condensed', sans-serif; font-size:1.25em;">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt style="font-family: 'Montserrat', sans-serif; font-weight: 900;">
+            @Html.DisplayNameFor(model => model.YearEstablished) :
+        </dt>
+
+        <dd style="font-family: 'Roboto Condensed', sans-serif; font-size:1.25em;">
+            @Html.DisplayFor(model => model.YearEstablished)
+        </dd>
+
+        <dt style="font-family: 'Montserrat', sans-serif; font-weight: 900;">
+            @Html.DisplayNameFor(model => model.Description) :
+        </dt>
+
+        <dd style="font-family: 'Roboto Condensed', sans-serif; font-size:1.25em;">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt style="font-family: 'Montserrat', sans-serif; font-weight: 900;">
+            @Html.DisplayNameFor(model => model.ParkSize) :
+        </dt>
+
+        <dd style="font-family: 'Roboto Condensed', sans-serif; font-size:1.25em;">
+            @Html.DisplayFor(model => model.ParkSize)
+        </dd>
+
+        <dt style="font-family: 'Montserrat', sans-serif; font-weight: 900;">
+            @Html.DisplayNameFor(model => model.AverageRating) :
+        </dt>
+
+        <dd style="font-family: 'Roboto Condensed', sans-serif; font-size:1.25em;">
+            @Html.DisplayFor(model => model.AverageRating)
+        </dd>
+
+    </dl>
+
+    <p>
+        @Html.ActionLink("Back to List", "Index") |
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ParkId }) |
+        @Html.ActionLink("Delete", "Delete", new { id = Model.ParkId })
+    </p>
+
+    <hr />
+
+    <h3 style="font-family: 'Montserrat', sans-serif; font-weight:bold;">Park Trails</h3>
+    <p>
+        @Html.ActionLink("Create A New Trail", "TrailCreate")
+    </p>
+
+    <table class="table" style="background-color:#1a394e;">
+        <tr style="color:#f4f5f7; font-size:1.20em; font-family: 'Montserrat', sans-serif;">
+            <th>
+            </th>
+            <th>
+                <h5><b>Name</b></h5>
+            </th>
+            <th>
+                <h5><b>Length (in miles)</b></h5>
+            </th>
+            <th>
+                <h5><b>Trail Difficulty</b></h5>
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Trails)
+        {
+            <tr style="background-color:#91c7de; color:#1a394e; border-top: solid 5px; border-color:white; font-weight:bold; font-family: 'Roboto Condensed', sans-serif; font-size:1.15em;">
+                <td>
+                    @Html.HiddenFor(modelItem => item.TrailId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Length)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrailDifficulty)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "TrailDetails", new { id = item.TrailId })
+                </td>
+            </tr>
+        }
+    </table>
+
+
+</div>

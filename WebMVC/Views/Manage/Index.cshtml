@@ -1,0 +1,29 @@
+﻿@model WebMVC.Models.IndexViewModel
+@{
+    ViewBag.Title = "Account Manage";
+}
+
+    <h2 style="color:#1a394e; display:flex; align-content:center; justify-content:center;" ">@ViewBag.Title</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div>
+    <h4 style="color:#1a394e; display:flex; align-content:center; justify-content:center;">Change your account settings</h4>
+    <hr />
+    <dl class="dl-horizontal" style="color:#1a394e; display:flex; align-content:center; justify-content:center;">
+        <dd></dd>
+        <dt style="color:#1a394e;">Password:</dt>
+        <dd style="margin-left:10px;">
+            [
+            @if (Model.HasPassword)
+            {
+                @Html.ActionLink("Change your password", "ChangePassword")
+            }
+            else
+            {
+                @Html.ActionLink("Create", "SetPassword")
+            }
+            ]
+        </dd>
+        <dd></dd>
+    </dl>
+</div>

@@ -1,0 +1,87 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<Models.Trail.TrailListItem>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 style="color:#1a394e; font-family: 'Montserrat', sans-serif; font-weight:bold;">North Carolina Park Trails</h2>
+<br />
+
+@using (Html.BeginForm("SearchTrail", "Trail", FormMethod.Get))
+{
+    <p style="color:#1a394e; font-family: 'Roboto Condensed', sans-serif; font-size:1.25em;">
+        Find Trail: @Html.TextBox("search")
+        <input type="submit" value="Search" />
+    </p>
+}
+<br />
+
+
+@if (TempData.ContainsKey("SaveResult"))
+{
+    <div class="alert alert-success fade in" role="alert">
+
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+
+        @TempData["SaveResult"]
+
+    </div>
+
+}
+
+@if (TempData.ContainsKey("FailResult"))
+{
+    <div class="alert alert-danger fade in" role="alert">
+
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+
+        @TempData["FailResult"]
+
+    </div>
+
+}
+
+<p>
+    @Html.ActionLink("Create A New Trail", "TrailCreate")
+</p>
+
+<table class="table" style="background-color:#1a394e;">
+    <tr style="color:#f4f5f7; font-size:1.20em; font-family: 'Montserrat', sans-serif; text-indent:24px;">
+        <th>
+            @Html.DisplayNameFor(model => model.First().Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().ParkName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Length)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr style="background-color:#91c7de; color:#1a394e; border-top: solid 5px; border-color:white; font-weight:bold; font-family: 'Roboto Condensed', sans-serif; font-size:1.15em; text-indent:24px;">
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Length)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "TrailDetails", new { id = item.TrailId })
+            </td>
+        </tr>
+    }
+
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

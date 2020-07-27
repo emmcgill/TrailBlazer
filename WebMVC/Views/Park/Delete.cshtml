@@ -1,0 +1,69 @@
+﻿@model Models.Park.ParkDetail
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Are you sure you want to delete this park?</h3>
+<hr />
+
+<div style="background-color:#91c7de; border:solid 5px #1a394e; color:#1a394e; padding:25px;">
+    <dl class="dl-horizontal" style="font-size:1.10em;">
+        @Html.HiddenFor(model => model.ParkId)
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name) :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address) :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.YearEstablished) :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.YearEstablished)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ParkSize) :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ParkSize)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description) :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" style="margin: 5px 0 0 100px;" />
+        </div>
+    }
+</div>
+
+<div style="margin:10px;">
+    <a href="javascript:void(0);" onclick="history.go(-1);">Back to Details</a>
+</div>

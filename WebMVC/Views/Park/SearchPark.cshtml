@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Models.Park.ParkListItem>
+
+@{
+    ViewBag.Title = "Parks";
+}
+
+<h2 style="color:#1a394e; font-family: 'Montserrat', sans-serif; font-weight:bold;">North Carolina State Parks</h2>
+<br />
+
+@using (Html.BeginForm("SearchPark", "Park", FormMethod.Get))
+{
+    <p style="color:#1a394e; font-family: 'Roboto Condensed', sans-serif; font-size:1.25em;">
+        Find Park: @Html.TextBox("search")
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<br />
+
+<p>
+    @Html.ActionLink("Create A New Park", "Create")
+</p>
+
+@if (TempData.ContainsKey("SaveResult"))
+{
+    <div class="alert alert-success fade in" role="alert">
+
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+
+        @TempData["SaveResult"]
+
+    </div>
+
+}
+
+<table class="table" style="background-color:#1a394e;">
+    <tr style="color:#f4f5f7; font-size:1.20em; font-family: 'Montserrat', sans-serif;">
+        <th>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ParkSize)
+        </th>
+        <th> </th>
+    </tr>
+
+    @if (Model.Count() == 0)
+    {
+        <tr style="background-color:#91c7de; color:#1a394e; border-top: solid 5px; border-color:white; font-weight:bold; font-family: 'Roboto Condensed', sans-serif; font-size:1.15em;">
+            <td colspan="5" style="text-indent:55px;">
+                Park Name Not Found
+            </td>
+        </tr>
+    }
+    else
+    {
+        foreach (var park in Model)
+        {
+            <tr style="background-color:#91c7de; color:#1a394e; border-top: solid 5px; border-color:white; font-weight:bold; font-family: 'Roboto Condensed', sans-serif; font-size:1.15em;">
+                <td>
+                    @Html.HiddenFor(parkItem => park.ParkId)
+                </td>
+                <td>
+                    @Html.DisplayFor(parkItem => park.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(parkItem => park.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(parkItem => park.ParkSize)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = park.ParkId })
+                </td>
+            </tr>
+        }
+    }
+</table>

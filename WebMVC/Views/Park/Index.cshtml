@@ -1,0 +1,93 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<Models.Park.ParkListItem>
+
+@{
+    ViewBag.Title = "Parks";
+}
+
+
+<h2 style="color:#1a394e; font-family: 'Montserrat', sans-serif; font-weight:bold;">North Carolina State Parks</h2>
+<br />
+
+@using (Html.BeginForm("SearchPark", "Park", FormMethod.Get))
+{
+    <p style="color:#1a394e; font-family: 'Roboto Condensed', sans-serif; font-size:1.25em;">
+        Find Park: @Html.TextBox("search")
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<br />
+
+@if (TempData.ContainsKey("SaveResult"))
+{
+    <div class="alert alert-success fade in" role="alert">
+
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+
+        @TempData["SaveResult"]
+
+    </div>
+
+}
+
+@if (TempData.ContainsKey("FailResult"))
+{
+    <div class="alert alert-danger fade in" role="alert">
+
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+
+        @TempData["FailResult"]
+
+    </div>
+
+}
+
+<p>
+    @Html.ActionLink("Create A New Park", "Create")
+</p>
+
+<table class="table" style="background-color:#1a394e;">
+    <tr style="color:#f4f5f7; font-size:1.20em; font-family: 'Montserrat', sans-serif;">
+        <th>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().ParkSize)
+        </th>
+        <th> </th>
+    </tr>
+    @foreach (var park in Model)
+    {
+        <tr style="background-color:#91c7de; color:#1a394e; border-top: solid 5px; border-color:white; font-weight:bold; font-family: 'Roboto Condensed', sans-serif; font-size:1.15em;">
+            <td>
+                @Html.HiddenFor(parkItem => park.ParkId)
+            </td>
+            <td>
+                @Html.DisplayFor(parkItem => park.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(parkItem => park.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(parkItem => park.ParkSize)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = park.ParkId })
+            </td>
+
+
+        </tr>
+    }
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

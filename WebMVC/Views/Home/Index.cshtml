@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="body-content wrapper" style="background-color:#f4f5f7; padding: 0px; margin-top:50px; width:100%;">
+    <div class="background-image" style="background-image: url(../../Content/Images/MAP.PNG); height:600px; width:100%; margin:100px 0px 75px 0px; filter:brightness(90%);">
+
+        <div class="home-content-wrapper" style="padding:145px 25px">
+            <div class="home-text-content-wrapper" style=" background-color:#1a394e; color:white; filter:brightness(100%); padding:25px; border-radius:10px;">
+                <h2 class="home-title" style="text-align:center; font-family: 'Montserrat', sans-serif; font-weight:bold; font-size:3.20em;">
+                    TRAILBLAZER
+                </h2>
+                <div class="home-text-wrapper" style="margin-top:35px; text-align:center;">
+                    <h5 style="font-size:1.25em; display:inline-block; padding:0 300px; font-family: 'Roboto Condensed', sans-serif; line-height: 1.20;">
+                        Welcome to TrailBlazer, a web application which allows North Carolina outdoors enthusiasts the ability to 
+                        review and rate state park trails. Whether you are planning your next adventure or want to share your previous 
+                        travels with fellow hikers TrailBlazer is for you!
+                    </h5>
+                </div>
+                <div class="home-links-wrapper" style="display:flex; justify-content:center; margin-top:30px; margin-bottom:30px;">
+                    <button type="button" style="background-color:#91c7d3; border:none; margin-right:250px; padding:10px 20px 10px 20px; border-radius:3px; font-size:1.25em; font-family: 'Montserrat', sans-serif;">@Html.ActionLink("Parks", "Index", "Park", null, new { @class = "Link" })</button>
+                    <button type="button" style="background-color:#91c7d3; padding:10px 20px 10px 20px; border:none; border-radius:3px; font-size:1.25em; font-family: 'Montserrat', sans-serif;">@Html.ActionLink("Trails", "Index", "Trail", null, new { @class = "Link" })</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

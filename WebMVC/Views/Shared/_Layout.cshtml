@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Condensed&display=swap" rel="stylesheet">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <style type="text/css">
+        .Link {
+            text-decoration: none;
+            color: #f4f5f7;
+            font-size: 1.10em;
+        }
+    </style>
+
+
+</head>
+<body style="padding-top:0px; padding-bottom:0px; width: 100vw;">
+    <div class="navigation-wrapper" style="height: 250px;px; background-color: #1a394e; color: #f4f5f7;
+        display: flex; justify-content: space-between; align-items: center; padding: 60px 145px; margin-bottom">
+
+        <div class="left-column" style=" display: flex; align-items: center;">
+            <div class="space" style="color:#1a394e;">
+                <div style="margin-left:195px;">
+                    -
+                </div>
+            </div>
+        </div>
+
+
+        <div class="center-column" style="display: grid; grid-template-columns: 1fr; grid-gap: 42px;">
+            <div class="banner-image" style="display: flex; justify-content: center; width:auto; width: 250px; height: 144px;">
+                <div class="logo" style="background-image: url(../../Content/Images/Logo2.PNG); width:100%; height: 100%; background-position:center; background-repeat:no-repeat; background-size:cover">
+                  
+                </div>
+
+            </div>
+
+            <div class="links-wrapper" style=" display: flex; justify-content: space-between; align-items: center; margin:5px;">
+                <div class="nav-link" style=" text-align: center;">
+                    <a href="index.html" style="color: #f4f5f7; font-family: 'Montserrat', sans-serif;">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "Link" })</a>
+                </div>
+
+                <div class="nav-link">
+                    <a href="about.html" style="color: #f4f5f7; font-family: 'Montserrat', sans-serif;">@Html.ActionLink("Parks", "Index", "Park", null, new { @class = "Link" })</a>
+                </div>
+
+                <div class="nav-link">
+                    <a href="menu.html" style="color: #f4f5f7; font-family: 'Montserrat', sans-serif;">@Html.ActionLink("Trails", "Index", "Trail", null, new { @class = "Link" })</a>
+                </div>
+
+                <div class="nav-link">
+                    <a href="contact.html" style="color: #f4f5f7; text-decoration: none;">@Html.ActionLink("User Reviews", "Index", "TrailReview", null, new { @class = "Link" })</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-column" style="text-decoration-color:#f4f5f7;">
+            @Html.Partial("_LoginPartial")
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+    <div class="container body-content" style=" width:75vw;">
+        @RenderBody()
+        <hr />
+    </div>
+
+    <footer style="background-color: #1a394e; color: #f4f5f7; display:flex; justify-content:center; align-items:center; height:50px; width: 100vw;">
+        <p> Erik McGill - @DateTime.Now.Year</p>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

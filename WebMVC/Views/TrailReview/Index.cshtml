@@ -1,0 +1,102 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<Models.Review.TrailReview.TrailReviewListItem>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 style="color:#1a394e; font-family: 'Montserrat', sans-serif; font-weight:bold;">User Reviews</h2>
+<br />
+
+@using (Html.BeginForm("SearchTrailReviewByName", "TrailReview", FormMethod.Get))
+{
+    <p style="color:#1a394e; font-family: 'Roboto Condensed', sans-serif; font-size:1.25em;">
+        Find Review By Trail Name: @Html.TextBox("search")
+        <input type="submit" value="Search" />
+    </p>
+}
+<br />
+
+@if (TempData.ContainsKey("SaveResult"))
+{
+    <div class="alert alert-success fade in" role="alert">
+
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+
+        @TempData["SaveResult"]
+
+    </div>
+
+}
+
+@if (TempData.ContainsKey("FailResult"))
+{
+    <div class="alert alert-danger fade in" role="alert">
+
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+
+        @TempData["FailResult"]
+
+    </div>
+
+}
+
+<table class="table" style="background-color:#1a394e;">
+    <tr style="color:#f4f5f7; font-size:1.20em; font-family: 'Montserrat', sans-serif; text-indent:24px;">
+        <th>
+            @Html.DisplayNameFor(model => model.First().TrailName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Score)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().VisitDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Model.Count() == 0)
+    {
+        <tr style="background-color:#91c7de; color:#1a394e; border-top: solid 5px; border-color:white; font-weight:bold; font-family: 'Roboto Condensed', sans-serif; font-size:1.15em; text-indent:24px;">
+            <td colspan="5">
+                No Reviews Found
+            </td>
+        </tr>
+    }
+
+    else
+    {
+        foreach (var item in Model)
+        {
+            <tr style="background-color:#91c7de; color:#1a394e; border-top: solid 5px; border-color:white; font-weight:bold; font-family: 'Roboto Condensed', sans-serif; font-size:1.15em; text-indent:24px;">
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrailName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Score)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VisitDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "TrailReviewDetails", new { id = item.ReviewId }) |
+                    @Html.ActionLink("Edit", "TrailReviewEdit", new { id = item.ReviewId }) |
+                    @Html.ActionLink("Delete", "TrailReviewDelete", new { id = item.ReviewId })
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
